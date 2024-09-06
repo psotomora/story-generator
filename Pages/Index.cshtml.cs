@@ -2,7 +2,7 @@
 using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
+
 
 namespace StoryCreator.Pages
 {
@@ -22,20 +22,21 @@ namespace StoryCreator.Pages
 
         public void OnPost()
         {
-            string endpoint = "";
-            string key = "";
-            string deploymentName = "";
+            string endpoint = "https://aplix-openai-dyplast.openai.azure.com/";
+            string key = "45234f12cfb04eeab9338669a7151bb2";
+            string deploymentName = "Aplix-gpt-4o";
+
 
             OpenAIClient client = new(new Uri(endpoint), new AzureKeyCredential(key));
 
-            string prompt = $"Write me a story called {Details.Title} in a {Details.Tone} tone about a " +
-                $"{Details.Animal} named {Details.Name} who lives in a {Details.Environment}.";
+            string prompt = $"Escríbame una historia llamada {Details.Title} en un tono {Details.Tone} sobre un " +
+                $"{Details.Animal} llamado {Details.Name} que vive en un lugar llamado {Details.Environment}.";
 
             ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
             {
                 Messages =
                 {
-                    new ChatMessage(ChatRole.System, "You are a helpful AI bot."),
+                    new ChatMessage(ChatRole.System, "Usted es un asistente de IA que ayuda con lo solicitado."),
                     new ChatMessage(ChatRole.User, prompt)
                 }
             };
